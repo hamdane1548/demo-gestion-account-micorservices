@@ -42,4 +42,9 @@ public class AccountControlleur {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto(AccountConstant.STATUS_500,AccountConstant.MESSAGE_500));
         }
     }
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDto> deletecustomersandaccount(@RequestParam String phone){
+        Boolean delete=accountServices.deleteAccount(phone);
+       return   delete? ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseDto(AccountConstant.STATUS_200,AccountConstant.MESSAGE_200)) : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto(AccountConstant.STATUS_500,AccountConstant.MESSAGE_500));
+    }
 }

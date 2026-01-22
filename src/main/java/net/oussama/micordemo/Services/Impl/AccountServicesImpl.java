@@ -55,6 +55,15 @@ public class AccountServicesImpl implements IAccountService {
         return customersDto;
     }
     @Override
+    public Boolean deleteAccount(String phone){
+        Customers customers=customersRepositroy.finByphone(phone).orElseThrow(
+                ()->new ResourceNotFoundException("Customers","phone",phone.toString())
+        );
+        accountReositroy.deleteBycustomerNumber(customers.getId());
+        customersRepositroy.deleteById(customers.getId());
+        return true;
+    }
+    @Override
     public Boolean updateAccount(CustomersDto customersDto) {
           AccountDto accountDto=customersDto.getAccount().orElseThrow(()->new ResourceNotFoundException("account","account",customersDto.getPhone()));
           AccountEntity accountEntity = AccountMapper.maptoAccountEntity(accountDto);
