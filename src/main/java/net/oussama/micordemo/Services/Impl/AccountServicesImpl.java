@@ -9,6 +9,7 @@ import net.oussama.micordemo.entites.AccountEntity;
 import net.oussama.micordemo.entites.Customers;
 import net.oussama.micordemo.exeption.CustomerAleradyExistExeption;
 import net.oussama.micordemo.exeption.ResourceNotFoundException;
+import net.oussama.micordemo.mapper.AccountMapper;
 import net.oussama.micordemo.mapper.CustomerMapper;
 import net.oussama.micordemo.repository.AccountReositroy;
 import net.oussama.micordemo.repository.CustomersRepositroy;
@@ -42,11 +43,28 @@ public class AccountServicesImpl implements IAccountService {
         Customers customers=customersRepositroy.finByphone(phone).orElseThrow(()->{
             return  new ResourceNotFoundException("Customers","mobileNumber",phone);
         });
-        System.out.println(customers.getId());
         AccountEntity account=accountReositroy.findBycustomerNumber(customers.getId()).orElseThrow(()-> new ResourceNotFoundException("Account","customer",String.valueOf(customers.getId())));
+        AccountDto accountDto=new AccountDto();
+        accountDto.setAccountNumber(account.getAccountNumber());
+        accountDto.setAccountType(account.getAccountType());
+        accountDto.setCustomerNumber(customers.getId());
+        accountDto.setBranchAddress(account.getBranchAddress());
         CustomersDto customersDto=CustomerMapper.maptoCustomerDto(customers);
-        customersDto.setAccount(Optional.ofNullable(account));
+
+        customersDto.setAccount(Optional.ofNullable(accountDto));
         return customersDto;
+    }
+    @Override
+    public Boolean updateAccount(CustomersDto customersDto) {
+          AccountDto accountDto=customersDto.getAccount().orElseThrow(()->new ResourceNotFoundException("account","account",customersDto.getPhone()));
+          AccountEntity accountEntity = AccountMapper.maptoAccountEntity(accountDto);
+          accountReositroy.save(accountEntity);
+          Customers customers = customersRepositroy.finByphone(customersDto.getPhone()).orElseThrow(()->new ResourceNotFoundException("Customer","phone",customersDto.getPhone()));
+          customers.setAddress(customersDto.getAddress());
+          customers.setName(customersDto.getName());
+          customers.setEmail(customersDto.getEmail());
+          customersRepositroy.save(customers);
+          return true;
     }
 
         private AccountEntity createAccount(Customers customers) {

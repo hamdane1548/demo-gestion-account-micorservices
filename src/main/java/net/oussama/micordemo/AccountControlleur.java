@@ -33,5 +33,13 @@ public class AccountControlleur {
                   .status(HttpStatus.ACCEPTED)
                   .body(customersDto);
     }
-
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDto> updateAccount(@RequestBody CustomersDto customersDto){
+         Boolean check=accountServices.updateAccount(customersDto);
+        if (check) {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseDto(AccountConstant.STATUS_200,AccountConstant.MESSAGE_200));
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto(AccountConstant.STATUS_500,AccountConstant.MESSAGE_500));
+        }
+    }
 }

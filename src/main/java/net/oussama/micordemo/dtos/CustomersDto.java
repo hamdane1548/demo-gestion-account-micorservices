@@ -11,5 +11,5 @@ public class CustomersDto {
     private String email;
     private String address;
     private String phone;
-    private Optional<AccountEntity> account;
+    private Optional<AccountDto> account;
 }
