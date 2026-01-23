@@ -1,9 +1,30 @@
 package net.oussama.micordemo;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Account REST API microserivces",
+                description = "bank account rest api microservices",
+                version = "v1",
+                contact = @Contact(
+                        name = "oussama hamane",
+                        email = "oussamahadane128@gmail.com",
+                        url = "oussama.com"
+                ),
+                license = @License(
+                        name = "Apache 2.0"
+                )
+        )
+)
+@EnableJpaAuditing(auditorAwareRef = "auditAwardImpl")
 public class MicorDemoApplication {
 
     public static void main(String[] args) {

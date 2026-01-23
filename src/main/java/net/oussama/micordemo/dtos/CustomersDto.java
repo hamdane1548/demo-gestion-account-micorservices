@@ -19,7 +19,7 @@ public class CustomersDto {
     private String email;
     @NotEmpty(message = "you must write an address")
     private String address;
-    @Pattern(regexp = "(^[+](212).([0-9]{8}))",message = "Mobile number most be +212+your number ")
+    @Pattern(regexp = "(^([0-9]{10}))",message = "Mobile number most be +212+your number ")
     private String phone;
     private Optional<AccountDto> account;
 }

@@ -33,9 +33,9 @@ public class AccountServicesImpl implements IAccountService {
         if(optionalCustomers.isPresent()){
             throw new CustomerAleradyExistExeption("customer deja exists");
         }
-        customers.setCreadtedBy(customersDto.getName());
-        customers.setCreationDate(LocalDateTime.now());
+
         Customers customersId =customersRepositroy.save(customers);
+        System.out.println(customersId);
         accountReositroy.save(createAccount(customersId));
     }
     @Override
@@ -50,7 +50,6 @@ public class AccountServicesImpl implements IAccountService {
         accountDto.setCustomerNumber(customers.getId());
         accountDto.setBranchAddress(account.getBranchAddress());
         CustomersDto customersDto=CustomerMapper.maptoCustomerDto(customers);
-
         customersDto.setAccount(Optional.ofNullable(accountDto));
         return customersDto;
     }
