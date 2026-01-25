@@ -1,5 +1,6 @@
 package net.oussama.micordemo.dtos;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -10,7 +11,14 @@ import net.oussama.micordemo.entites.AccountEntity;
 import java.util.Optional;
 
 @Data
+@Schema(
+        name = "Customers",
+        description = "Schema to hold customers and account informations"
+)
 public class CustomersDto {
+    @Schema(
+            description = "Name of the customers" , example = "Oussama"
+    )
     @NotEmpty(message = "Name cannot be a null or empty")
     @Size(max = 30,min = 4,message = "min caractere is between 4 and 30")
     private String name;
