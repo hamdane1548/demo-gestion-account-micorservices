@@ -29,7 +29,7 @@ services:
      deploy:
        resources:
          limits:
-           memory: 500m
+           memory: 800m
      networks:
       - eazybank
 networks:

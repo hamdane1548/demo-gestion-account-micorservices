@@ -17,5 +17,11 @@ public interface ServicesCard {
      * @return
      */
     CardsDto getCard(String card_number);
+
+    /**
+     *
+     * @param cardsDto
+     */
     void updateCard(CardsDto cardsDto);
+    void deletecard(String phone_numbrer);
 }

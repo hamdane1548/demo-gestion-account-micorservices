@@ -36,4 +36,10 @@ public class CardsControlleur {
         cardsService.updateCard(cardsDto);
         return new ResponseEntity<>(new ResponseDto(CardsConstant.STATUS_200,CardsConstant.MESSAGE_200), HttpStatus.OK);
     }
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDto> deletecard(@Valid @RequestBody CardsDto cardsDto){
+        cardsService.deletecard(cardsDto.getMobile_number());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDto(CardsConstant.STATUS_200,CardsConstant.MESSAGE_200));
+    }
 }

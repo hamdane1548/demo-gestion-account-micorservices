@@ -47,4 +47,11 @@ public class CardsImplServices implements ServicesCard {
           cardsRepository.save(cards);
     }
 
+    @Override
+    public void  deletecard(String phone_number){
+        Cards cards = cardsRepository.findBy_phone(phone_number).orElseThrow(
+                () -> new CardAlerdayExistsExption("card not found")
+        );
+        cardsRepository.delete(cards);
+    }
 }
