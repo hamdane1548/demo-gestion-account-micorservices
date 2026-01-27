@@ -3,6 +3,7 @@ package net.oussama.loans;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import net.oussama.loans.Dto.AccountEnvSupportDto;
 import net.oussama.loans.Dto.LoansDto;
 import net.oussama.loans.Dto.ResponseDto;
 import net.oussama.loans.Services.Impl.LoansServiceImpl;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class controlleurLoans {
     private LoansServiceImpl loansservice;
+    private AccountEnvSupportDto accountenv;
     @PostMapping("/create")
     public ResponseEntity<ResponseDto> create(@Valid @RequestBody LoansDto loansDto){
         loansservice.CreateLoans(loansDto);
@@ -37,4 +39,10 @@ public class controlleurLoans {
         Boolean update = loansservice.updateLoans(loansDto);
        return update?  ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseDto("updated",Constant.STATUS_200)) : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("file to update",Constant.STATUS_500));
    }
+   @GetMapping("/supportinfo")
+   public ResponseEntity<AccountEnvSupportDto> getAccountEnvSupport(){
+        return ResponseEntity
+                .status(HttpStatus.ACCEPTED)
+                .body(accountenv);
+    }
 }

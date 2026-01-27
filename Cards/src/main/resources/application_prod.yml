@@ -1,0 +1,14 @@
+
+build:
+  version: "2.0"
+accounts:
+  message : "creation api de gestion de cards api QA environnement"
+  accounts:
+    name : "oussama hamdane Qa testing"
+    email: "oussamahamdane#0@gmail.com"
+  contact:
+    - (212) 63386-9171
+spring:
+  config:
+    activate:
+      on-profile: "prod"

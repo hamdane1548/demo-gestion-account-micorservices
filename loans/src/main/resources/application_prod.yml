@@ -1,0 +1,14 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+build:
+  version: "2.0"
+contact:
+  message : "Microservices de gestion de loans via restapi espace production"
+  contact :
+    name: "oussama hamdane prod tools"
+    email: "oussamaproduction@gmail.com"
+  support:
+    - (212)63386-9170
+

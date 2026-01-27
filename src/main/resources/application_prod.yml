@@ -1,0 +1,14 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+build:
+  version: "1.0"
+
+accounts:
+  message: "Welcome to eazy bank related production Api"
+  contactDetails:
+    name : "oussama hamdne prod jade hamdane"
+    email : "jade@gmail.com"
+  onCallSupport:
+    - (212) 63386-9170

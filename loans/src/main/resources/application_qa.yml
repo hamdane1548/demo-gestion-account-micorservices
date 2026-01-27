@@ -1,0 +1,14 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+build:
+  version: "3.0"
+contact:
+  message : "Microservices de gestion de loans via restapi espace qa"
+  contact :
+    name: "oussama hamdane qa tools"
+    email: "oussamaqa@gmail.com"
+  support:
+    - (212)63386-9170
+

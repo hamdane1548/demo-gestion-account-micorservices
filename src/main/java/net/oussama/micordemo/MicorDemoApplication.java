@@ -4,10 +4,12 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
+import net.oussama.micordemo.dtos.AccountContactInfoDTo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
+@EnableConfigurationProperties(value = AccountContactInfoDTo.class)
 @SpringBootApplication
 @OpenAPIDefinition(
         info = @Info(

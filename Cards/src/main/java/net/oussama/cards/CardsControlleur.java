@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import net.oussama.cards.Dto.CardsDto;
+import net.oussama.cards.Dto.InformatiionAccountDto;
 import net.oussama.cards.Dto.ResponseDto;
 import net.oussama.cards.Services.Impl.CardsImplServices;
 import net.oussama.cards.constant.CardsConstant;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping(path = "/api",produces = {MediaType.APPLICATION_JSON_VALUE})
 public class CardsControlleur {
+    private InformatiionAccountDto informatiionAccountDto;
     private CardsImplServices  cardsService;
     @PostMapping("/create")
     public ResponseEntity<ResponseDto> createCards(@Valid @RequestBody CardsDto cardsDto) {
@@ -41,5 +43,11 @@ public class CardsControlleur {
         cardsService.deletecard(cardsDto.getMobile_number());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDto(CardsConstant.STATUS_200,CardsConstant.MESSAGE_200));
+    }
+    @GetMapping("/support-contact")
+    public ResponseEntity<InformatiionAccountDto> ContactSupport(){
+        return ResponseEntity
+                .status(HttpStatus.ACCEPTED)
+                .body(informatiionAccountDto);
     }
 }

@@ -1,0 +1,14 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+build:
+  version: "2.0"
+
+accounts:
+  message: "Welcome to eazy bank related QAApi"
+  contactDetails:
+    name : "oussama hamdne QA jade hamdane"
+    email : "jade@gmail.com"
+  onCallSupport:
+    - (212) 63386-9170
