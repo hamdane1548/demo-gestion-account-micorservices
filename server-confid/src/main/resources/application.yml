@@ -4,9 +4,11 @@ spring:
   application:
     name: "configserveur"
   profiles:
-    active: native
+   # active: native
+   active : git
   cloud:
     config:
       server:
         native:
-          search-locations: "classpath:/config"
+          search-locations: "file:///C:\\Users\\oussa\\Documents\\config"
+        # search-locations: "classpath:/config"
