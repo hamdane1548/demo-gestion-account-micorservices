@@ -1,0 +1,9 @@
+build:
+  version: "1.0"
+accounts:
+  message : "creation api de gestion de cards api"
+  accounts:
+    name : "oussama hamdane dev cards"
+    email: "oussamahamdane#0@gmail.com"
+  contact:
+    - (212) 63386-9178

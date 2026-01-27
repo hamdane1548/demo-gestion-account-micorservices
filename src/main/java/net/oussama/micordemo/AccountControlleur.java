@@ -38,8 +38,7 @@ public class AccountControlleur {
     public AccountControlleur(AccountServicesImpl accountServices) {
         this.accountServices = accountServices;
     }
-    @Value("${build.version}")
-    private String buildVersion;
+
     @Autowired
     private AccountContactInfoDTo accountContactInfoDTo;
     @Autowired
@@ -97,10 +96,7 @@ public class AccountControlleur {
 
             )}
     )
-    @GetMapping("/version")
-    public ResponseEntity<String> getbuildinfo(){
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(buildVersion);
-    }
+
     @GetMapping("/envariable")
     public ResponseEntity<String> getbuildenvvariable(){
         return ResponseEntity

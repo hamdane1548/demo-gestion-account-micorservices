@@ -1,4 +1,3 @@
-
 build:
   version: "2.0"
 accounts:
@@ -8,7 +7,3 @@ accounts:
     email: "oussamahamdane#0@gmail.com"
   contact:
     - (212) 63386-9171
-spring:
-  config:
-    activate:
-      on-profile: "prod"

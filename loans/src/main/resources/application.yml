@@ -13,27 +13,13 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-
+  config:
+    import: "configserver:http://localhost:8082/"
   web:
     error:
       include-stacktrace: never
-  config:
-    activate:
-      - "application_qa.yml"
-      - "application_qa.yml"
   profiles:
     active: "qa"
-server:
-  port: 8085
-build:
-  version: "1.0"
-contact:
-  message : "Microservices de gestion de loans via restapi"
-  contact :
-    name: "oussama hamddane env enviromenent"
-    email: "oussamahamdane@gmail.com"
-  support:
-    - (212)63386-9178
-
-
+  application:
+    name: "loans"
 

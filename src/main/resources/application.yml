@@ -17,19 +17,10 @@ spring:
       ddl-auto: update
     show-sql: true
   config:
-    import:
-      - "application_qa.yml"
-      - "application_prod.yml"
+    import: "optional:configserver:http://localhost:8082/"
+  application:
+    name: "account"
   profiles:
-    active:
-      - "qa"
-build:
-  version: "3.0"
+    active: "prod"
 
-accounts:
-  message: "Welcome to my personal project bank project Api"
-  contactDetails:
-    name : "oussama hamdne"
-    email : "oussama hamdane@gmail.com"
-  onCallSupport:
-    - (212) 63386-9178
+

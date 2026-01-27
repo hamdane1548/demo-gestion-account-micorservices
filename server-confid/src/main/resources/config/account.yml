@@ -1,0 +1,12 @@
+build:
+  version: "3.0"
+spring:
+  application:
+    name: "account"
+accounts:
+  message: "Welcome to my personal project bank project Api"
+  contactDetails:
+    name : "oussama hamdne"
+    email : "oussama hamdane@gmail.com"
+  onCallSupport:
+    - (212) 63386-9178

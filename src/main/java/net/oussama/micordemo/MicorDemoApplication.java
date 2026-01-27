@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableConfigurationProperties(value = AccountContactInfoDTo.class)
 @SpringBootApplication
+
 @OpenAPIDefinition(
         info = @Info(
                 title = "Account REST API microserivces",
