@@ -7,7 +7,3 @@ accounts:
     email: "oussamahamdane#0@gmail.com"
   contact:
     - (212) 63386-9170
-spring:
-  config:
-    activate:
-      on-profile: "qa"
