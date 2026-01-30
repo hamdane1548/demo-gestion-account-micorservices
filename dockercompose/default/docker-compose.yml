@@ -16,7 +16,7 @@ services:
       service: network-deploy-service
 
   serveurconfig:
-    image: "oussama2655/config:0.3"
+    image: "oussama2655/config:0.4"
     container_name: config_serveur
     ports:
       - "8082:8082"
