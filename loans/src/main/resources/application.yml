@@ -13,13 +13,22 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-  config:
-    import: "configserver:http://localhost:8082/"
   web:
     error:
       include-stacktrace: never
   profiles:
     active: "qa"
+  config:
+    import: "optional:configserver:http://localhost:8082/"
   application:
     name: "loans"
-
+  rabbitmq:
+    port: 5672
+    username: "guest"
+    password: "guest"
+    host: "localhost"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

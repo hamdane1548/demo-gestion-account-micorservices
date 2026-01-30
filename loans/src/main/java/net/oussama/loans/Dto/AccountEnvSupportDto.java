@@ -1,9 +1,16 @@
 package net.oussama.loans.Dto;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 import java.util.Map;
 @ConfigurationProperties(prefix = "contact")
-public record AccountEnvSupportDto(String message, Map<String,String> contact, List<String> support) {
+@Getter
+@Setter
+public class AccountEnvSupportDto {
+    private String message;
+    private Map<String,String> contact;
+    private List<String> support;
 }
