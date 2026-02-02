@@ -4,11 +4,36 @@ spring:
   application:
     name: "configserveur"
   profiles:
-   # active: native
-   active : git
+    # active: native
+    active : git
   cloud:
     config:
       server:
-        native:
-          search-locations: "file:///C:\\Users\\oussa\\Documents\\config"
-        # search-locations: "classpath:/config"
+        git:
+          uri: "https://github.com/hamdane1548/config-files.git"
+          force-pull: true
+          default-label: master
+          timeout: 5
+          clone-on-start: true
+          username: "hamdane1548"
+  rabbitmq:
+    port: 5672
+    username: "guest"
+    password: "guest"
+    host: "localhost"
+encrypt:
+  key: "wefoinewhfnivewhrwmoirwrbvwwnvenuewfhewpifvhuweivn "
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
