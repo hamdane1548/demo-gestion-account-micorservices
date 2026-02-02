@@ -1,21 +1,15 @@
+server:
+  port: 8085
 spring:
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
   datasource:
-    password:
-    username: oussama
-    url: jdbc:h2:mem:loans
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://localhost:3307/loans
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: update
-  web:
-    error:
-      include-stacktrace: never
+      ddl-auto: create
+    show-sql: true
   profiles:
     active: "qa"
   config:
