@@ -32,3 +32,20 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint:
+    shutdown:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8084/eureka/
+info:
+  app:
+    name: "account"
+    description: "account micorservice intances"
+    version: 1.0
