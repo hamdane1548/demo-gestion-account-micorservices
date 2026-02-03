@@ -17,3 +17,16 @@ services:
     environment:
         SPRING_PROFILES_ACTIVE: default
         SPRING_CONFIG_IMPORT: configserver:http://serveurconfig:8082/
+  connection-data-base:
+    extends:
+      service: network-deploy-service
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_USERNAME: root
+    healthcheck:
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+      test: [ "CMD","mysqladmin","ping","-h","localhost","--user=root","--password=root" ]
+
