@@ -1,6 +1,7 @@
 package net.oussama.cards;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import net.oussama.cards.Dto.CardsDto;
@@ -32,6 +33,11 @@ public class CardsControlleur {
         CardsDto cardsDto = cardsService.getCard(number_cards);
         return new ResponseEntity<>(cardsDto, HttpStatus.OK);
 
+    }
+    @GetMapping("/fetch_cardsnumber")
+    public ResponseEntity<CardsDto> fetchCardsPhone(@RequestParam @Pattern(regexp = "(^([0-9]{10}))") String phone_number){
+        CardsDto cardsdto = cardsService.getCardsBynumber(phone_number);
+        return new ResponseEntity<>(cardsdto, HttpStatus.OK);
     }
     @PutMapping("/update")
     public ResponseEntity<ResponseDto> updateCard(@Valid @RequestBody CardsDto cardsDto) {

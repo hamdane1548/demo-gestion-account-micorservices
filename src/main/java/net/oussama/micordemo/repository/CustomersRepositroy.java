@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface CustomersRepositroy extends JpaRepository<Customers,Long> {
     @Query("SELECT c from Customers c where c.phone like :phone")
-    Optional<Customers>  finByphone(@Param("phone") String phone);
+    Optional<Customers> finByphone(@Param("phone") String phone);
 }

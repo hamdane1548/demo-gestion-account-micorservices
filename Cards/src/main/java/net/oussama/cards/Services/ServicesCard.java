@@ -24,4 +24,9 @@ public interface ServicesCard {
      */
     void updateCard(CardsDto cardsDto);
     void deletecard(String phone_numbrer);
+    /*
+      * @param cardsdto
+      * fetch data by phone
+     */
+    CardsDto getCardsBynumber(String card_number);
 }

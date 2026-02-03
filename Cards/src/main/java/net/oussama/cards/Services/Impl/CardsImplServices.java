@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import net.oussama.cards.Dto.CardsDto;
 import net.oussama.cards.Exeption.CardAlerdayExistsExption;
+import net.oussama.cards.Exeption.Cardsnotfound;
 import net.oussama.cards.Services.ServicesCard;
 import net.oussama.cards.entites.Cards;
 import net.oussama.cards.mappers.CardsMappers;
@@ -46,7 +47,13 @@ public class CardsImplServices implements ServicesCard {
           cards.setCard_number(cardsDto.getCard_number());;
           cardsRepository.save(cards);
     }
-
+     @Override
+     public CardsDto getCardsBynumber(String phone_number) {
+        Cards cardsDto = cardsRepository.findBy_phone(phone_number).orElseThrow(
+                () -> new Cardsnotfound("cards not found")
+        );
+        return CardsMappers.toCardsDto(cardsDto);
+     }
     @Override
     public void  deletecard(String phone_number){
         Cards cards = cardsRepository.findBy_phone(phone_number).orElseThrow(

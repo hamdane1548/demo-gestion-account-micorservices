@@ -1,5 +1,6 @@
 package net.oussama.cards.repository;
 
+import net.oussama.cards.Dto.CardsDto;
 import net.oussama.cards.entites.Cards;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,5 +12,6 @@ public interface CardsRepository extends JpaRepository<Cards, Long> {
     @Query("select c from Cards c where c.card_number like :wq")
     Optional<Cards> findBycard_number(@Param("wq") String card_number);
     @Query("select phone from Cards phone where phone.mobile_number like:phone")
-    Optional<Cards> findBy_phone(@Param("phone")  String phone);
+    Optional<Cards> findBy_phone(@Param("phone") String phone);
+
 }
