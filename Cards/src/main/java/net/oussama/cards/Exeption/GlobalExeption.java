@@ -23,6 +23,17 @@ import java.util.Optional;
 
 @ControllerAdvice
 public class GlobalExeption extends ResponseEntityExceptionHandler {
+    @ExceptionHandler(Cardsnotfound.class)
+    public ResponseEntity<ErrorDto> cardsnotfoun(Cardsnotfound cardsnotfound,WebRequest webRequest) {
+        return new ResponseEntity<>(
+                new ErrorDto(
+                        webRequest.getContextPath(),
+                        LocalDateTime.now(),
+                        HttpStatus.INTERNAL_SERVER_ERROR,
+                        cardsnotfound.getMessage()
+                ),HttpStatus.INTERNAL_SERVER_ERROR
+        );
+    }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request){
         Map<String,String> errors = new HashMap<>();

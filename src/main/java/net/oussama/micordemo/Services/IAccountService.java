@@ -17,7 +17,7 @@ public interface IAccountService {
      * @param phone
      * @return Customer Dto
      */
-    CustomersDto fetchAccount(String phone);
+    CustomersDto  fetchAccount(String phone);
 
     /**
      *
