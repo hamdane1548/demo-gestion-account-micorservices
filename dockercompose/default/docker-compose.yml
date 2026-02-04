@@ -97,6 +97,22 @@ services:
     extends:
       file: common-config.yml
       service: microservice-configserver-config
+  cards2:
+    image: "oussama2655/cards:0.3"
+    container_name: cards-ms2
+    ports:
+      - "8189:8089"
+    depends_on:
+      serveurconfig:
+        condition: service_healthy
+      cardsdb:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://cardsdb:3306/cards"
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
   loans:
      image: "oussama2655/loans:0.3"
      container_name: loans-ms
