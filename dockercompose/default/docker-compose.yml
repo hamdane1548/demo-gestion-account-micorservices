@@ -64,7 +64,7 @@ services:
       service: microservice-base-config
 
   accounts:
-    image: "oussama2655/account:0.3"
+    image: "oussama2655/account:0.4"
     container_name: accounts-ms
     ports:
       - "8087:8087"
@@ -73,16 +73,15 @@ services:
          condition: service_healthy
        accountdb:
          condition: service_healthy
+
     environment:
         SPRING_APPLICATION_NAME: "account"
         SPRING_DATASOURCE_URL: "jdbc:mysql://accountdb:3306/accountdb"
     extends:
       file: common-config.yml
       service: microservice-configserver-config
-
-
   cards:
-    image: "oussama2655/cards:0.2"
+    image: "oussama2655/cards:0.3"
     container_name: cards-ms
     ports:
       - "8089:8089"
@@ -91,6 +90,7 @@ services:
         condition: service_healthy
       cardsdb:
         condition: service_healthy
+
     environment:
       SPRING_APPLICATION_NAME: "cards"
       SPRING_DATASOURCE_URL: "jdbc:mysql://cardsdb:3306/cards"
@@ -98,7 +98,7 @@ services:
       file: common-config.yml
       service: microservice-configserver-config
   loans:
-     image: "oussama2655/loans:0.2"
+     image: "oussama2655/loans:0.3"
      container_name: loans-ms
      ports:
        - "8085:8085"
@@ -113,6 +113,25 @@ services:
      extends:
        file: common-config.yml
        service: microservice-configserver-config
+  eurekaServer:
+    image: oussama2655/eurekaserver:0.2
+    container_name: eurekaserver
+    ports:
+      - 8084:8084
+    healthcheck:
+      test: "curl http://localhost:8084/actuator/health/readiness"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    depends_on:
+       serveurconfig:
+         condition: service_healthy
+    environment:
+       SPRING_CONFIG_IMPORT: configserver:http://serveurconfig:8082/
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
 networks:
   eazybank:
     driver: "bridge"
