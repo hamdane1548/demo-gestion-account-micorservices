@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: "apigateway"
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+  config:
+    import: configserver:http://localhost:8082/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+info:
+  app:
+    name: "api"
+    description: "api gateway"
+    version: 1.0
+server:
+  port: 8182
