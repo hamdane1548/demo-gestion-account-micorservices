@@ -9,6 +9,8 @@ import net.oussama.cards.Dto.InformatiionAccountDto;
 import net.oussama.cards.Dto.ResponseDto;
 import net.oussama.cards.Services.Impl.CardsImplServices;
 import net.oussama.cards.constant.CardsConstant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api",produces = {MediaType.APPLICATION_JSON_VALUE})
 public class CardsControlleur {
     private InformatiionAccountDto informatiionAccountDto;
+    private static final Logger log = LoggerFactory.getLogger(CardsControlleur.class);
     private CardsImplServices  cardsService;
     @PostMapping("/create")
     public ResponseEntity<ResponseDto> createCards(@Valid @RequestBody CardsDto cardsDto) {
@@ -29,7 +32,7 @@ public class CardsControlleur {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
     @GetMapping("/fetch")
-    public ResponseEntity<CardsDto> fetchCards(@RequestParam @Size(min=3,max = 15,message = "Donne un numero de card valid") String number_cards) {
+    public ResponseEntity<CardsDto> fetchCards(@RequestParam @Size(min=3,max = 15,message = "Donne un numero de card valid") String number_cards,@RequestHeader("eazybank-id-request") String correlationId) {
         CardsDto cardsDto = cardsService.getCard(number_cards);
         return new ResponseEntity<>(cardsDto, HttpStatus.OK);
 

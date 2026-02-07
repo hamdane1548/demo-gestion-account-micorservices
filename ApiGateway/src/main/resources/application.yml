@@ -29,3 +29,8 @@ info:
     version: 1.0
 server:
   port: 8182
+logging:
+  level:
+    com:
+      eazybytes:
+        gatewayserver: DEBUG

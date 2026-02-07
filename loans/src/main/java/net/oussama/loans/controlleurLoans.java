@@ -30,7 +30,7 @@ public class controlleurLoans {
         ), HttpStatus.CREATED);
     }
    @GetMapping("/fetch")
-    public ResponseEntity<LoansDto> fetch(@RequestParam @Valid @Pattern(regexp = "(^([0-9]{10}))",message = "number most be valid") String phone){
+    public ResponseEntity<LoansDto> fetch(@RequestParam @Valid @Pattern(regexp = "(^([0-9]{10}))",message = "number most be valid") String phone,@RequestHeader("eazybank-id-request") String correlationId){
         LoansDto loansDto = loansservice.fetchLoans(phone);
         return new ResponseEntity<>(loansDto,HttpStatus.OK);
    }

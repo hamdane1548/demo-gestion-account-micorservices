@@ -15,6 +15,7 @@ import net.oussama.micordemo.repository.AccountReositroy;
 import net.oussama.micordemo.repository.CustomersRepositroy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class CustomersServicesImpl implements ICustomersServices {
     private CardsFeignclients  cardsFeignclients;
     private LoansFeignclients loansFeignclients;
     @Override
-    public CustomersDetailsDto getCustomers(String phone_number) {
+    public CustomersDetailsDto getCustomers(String phone_number,String correlationId) {
        Customers customers = customersRepositroy.finByphone(phone_number).orElseThrow(
                ()-> new ResourceNotFoundException("customer","phone",phone_number)
        );
@@ -35,8 +36,8 @@ public class CustomersServicesImpl implements ICustomersServices {
         CustomersDto customersDto = CustomerMapper.maptoCustomerDto(customers);
         customersDto.setAccount(Optional.ofNullable(accountDto));
         CustomersDetailsDto customersDetailsDto = AccountDetailsMappers.customertoAccountDetailsMappers(customersDto);
-        ResponseEntity<LoansDto> loansfetchdata = loansFeignclients.fetch(phone_number);
-        ResponseEntity<CardsDto> cardsfetchdata = cardsFeignclients.fetchCardsPhone(phone_number);
+        ResponseEntity<LoansDto> loansfetchdata = loansFeignclients.fetch(phone_number,correlationId);
+        ResponseEntity<CardsDto> cardsfetchdata = cardsFeignclients.fetchCardsPhone(phone_number,correlationId);
         customersDetailsDto.setCards(cardsfetchdata.getBody());
         customersDetailsDto.setLoans(loansfetchdata.getBody());
         customersDetailsDto.setCustomerdto(customersDto);

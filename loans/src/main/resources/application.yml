@@ -43,3 +43,8 @@ info:
     name: "Loans"
     description: "loans microsevices"
     version : 1,0
+logging:
+  level:
+    com:
+      eazybytes:
+        loans: DEBUG

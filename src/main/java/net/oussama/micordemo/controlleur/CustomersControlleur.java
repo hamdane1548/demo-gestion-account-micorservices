@@ -10,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
 
@@ -27,8 +25,10 @@ import java.awt.*;
 public class CustomersControlleur {
     private  CustomersServicesImpl customersServicesImpl;
     @GetMapping("/fetch")
-    public ResponseEntity<CustomersDetailsDto> fetchCustomers(@Valid @Pattern( regexp = "(^([0-9]{10}))",message = "not valid") String phone_number){
-       CustomersDetailsDto customersDetailsDto =  customersServicesImpl.getCustomers(phone_number);
+    public ResponseEntity<CustomersDetailsDto> fetchCustomers(
+            @RequestHeader("eazybank-id-request") String correlationId,
+            @RequestParam @Valid @Pattern( regexp = "(^([0-9]{10}))",message = "not valid") String phone_number){
+        CustomersDetailsDto customersDetailsDto =  customersServicesImpl.getCustomers(phone_number,correlationId);
         return ResponseEntity.status(HttpStatus.OK).body(customersDetailsDto);
     }
 }

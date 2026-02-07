@@ -43,3 +43,8 @@ info:
     name: "cards"
     description: "cards config micorservices"
     version: 1.0
+logging:
+  level:
+    com:
+      eazybytes:
+        cards: DEBUG
