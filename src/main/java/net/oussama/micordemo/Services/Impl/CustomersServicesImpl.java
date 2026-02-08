@@ -2,6 +2,7 @@ package net.oussama.micordemo.Services.Impl;
 
 import lombok.AllArgsConstructor;
 import net.oussama.micordemo.Services.ICustomersServices;
+import net.oussama.micordemo.Services.client.CardsFallback;
 import net.oussama.micordemo.Services.client.CardsFeignclients;
 import net.oussama.micordemo.Services.client.LoansFeignclients;
 import net.oussama.micordemo.dtos.*;
@@ -13,6 +14,7 @@ import net.oussama.micordemo.mapper.AccountMapper;
 import net.oussama.micordemo.mapper.CustomerMapper;
 import net.oussama.micordemo.repository.AccountReositroy;
 import net.oussama.micordemo.repository.CustomersRepositroy;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -21,6 +23,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+
 public class CustomersServicesImpl implements ICustomersServices {
     private AccountReositroy   accountReositroy;
     private CustomersRepositroy customersRepositroy;
@@ -38,8 +41,12 @@ public class CustomersServicesImpl implements ICustomersServices {
         CustomersDetailsDto customersDetailsDto = AccountDetailsMappers.customertoAccountDetailsMappers(customersDto);
         ResponseEntity<LoansDto> loansfetchdata = loansFeignclients.fetch(phone_number,correlationId);
         ResponseEntity<CardsDto> cardsfetchdata = cardsFeignclients.fetchCardsPhone(phone_number,correlationId);
-        customersDetailsDto.setCards(cardsfetchdata.getBody());
-        customersDetailsDto.setLoans(loansfetchdata.getBody());
+        if(loansfetchdata != null) {
+            customersDetailsDto.setLoans(loansfetchdata.getBody());
+        }
+        if(cardsfetchdata != null) {
+            customersDetailsDto.setCards(cardsfetchdata.getBody());
+        }
         customersDetailsDto.setCustomerdto(customersDto);
         return customersDetailsDto;
     }

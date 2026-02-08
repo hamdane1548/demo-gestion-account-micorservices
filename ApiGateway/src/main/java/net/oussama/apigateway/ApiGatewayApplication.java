@@ -23,9 +23,13 @@ public class ApiGatewayApplication {
                                 .filters(f -> f.rewritePath("/eazybank/account/(?<segment>.*)", "/${segment}")
                                         .addResponseHeader("Content-Type", "application/json;charset=UTF-8")
                                         .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                        .circuitBreaker(cr -> cr.setName("accountcircuitbreaker")
+                                                .setFallbackUri("forward:/contactSupport"))
 
                                 )
+
                                 .uri("lb://ACCOUNT")
+
                         )
                 .route(r-> r
                         .path("/eazybank/cards/**")
