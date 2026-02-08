@@ -141,7 +141,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>oussama2655/account:0.4</name>
+                        <name>oussama2655/account:0.5</name>
                     </image>
                     <excludes>
                         <exclude>

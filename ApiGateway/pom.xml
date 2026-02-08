@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>ApiGateway</name>
     <description>ApiGateway</description>
+    <packaging>jar</packaging>
     <url/>
     <licenses>
         <license/>
@@ -80,8 +81,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <name>
+                            oussama2655/${project.artifactId}:0.1
+                        </name>
+                    </image>
+                </configuration>
             </plugin>
         </plugins>
+
     </build>
 
 </project>
