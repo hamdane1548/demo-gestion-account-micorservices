@@ -30,6 +30,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 )
 @EnableFeignClients
 @EnableJpaAuditing(auditorAwareRef = "auditAwardImpl")
+
 public class MicorDemoApplication {
 
     public static void main(String[] args) {

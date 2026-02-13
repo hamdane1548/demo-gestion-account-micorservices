@@ -1,5 +1,7 @@
 package net.oussama.micordemo.controlleur;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -13,6 +15,7 @@ import net.oussama.micordemo.dtos.CustomersDto;
 import net.oussama.micordemo.dtos.ResponseDto;
 import net.oussama.micordemo.exeption.CustomerAleradyExistExeption;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,7 +37,8 @@ public class AccountControlleur {
     public AccountControlleur(AccountServicesImpl accountServices) {
         this.accountServices = accountServices;
     }
-
+    @Value("${build.version}")
+    private String version;
     @Autowired
     private AccountContactInfoDTo accountContactInfoDTo;
     @Autowired
@@ -119,5 +123,19 @@ public class AccountControlleur {
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
                 .body(accountContactInfoDTo);
+    }
+    @RateLimiter(name = "ratelimitertest")
+    @Retry(name = "GET_VERSION", fallbackMethod = "getVersionfallback")
+    @GetMapping("/version")
+    public ResponseEntity<String> getVersion(){
+        return ResponseEntity
+                .status(HttpStatus.ACCEPTED)
+                .body(version);
+    }
+    public ResponseEntity<String> getVersionfallback(Throwable throwable){
+        System.out.println("oussama");
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("tet 5");
     }
 }

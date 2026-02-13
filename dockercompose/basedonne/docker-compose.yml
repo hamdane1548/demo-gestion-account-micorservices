@@ -1,0 +1,36 @@
+services:
+  accountdb:
+    image: mysql
+    container_name: accountdb
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD : root
+      MYSQL_DATABASE: accountdb
+  loansdb:
+      image: mysql
+      container_name: loansdb
+      ports:
+        - 3307:3306
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: loans
+  cardsdb:
+    image: mysql
+    container_name: cardsdb
+    ports:
+      - 3308:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cards
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: rabbitmq2
+    ports:
+      - 5672:5672
+      - 15672:15672
+  reddis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379

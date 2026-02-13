@@ -13,7 +13,7 @@ spring:
           uri: "https://github.com/hamdane1548/config-files.git"
           force-pull: true
           default-label: master
-          timeout: 5
+          timeout: 10
           clone-on-start: true
           username: "hamdane1548"
   rabbitmq:
